@@ -31,4 +31,4 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SEQAN_CXX_FLAGS}")
 
 # Add executable and link against SeqAn dependencies.
 add_executable (alphabet_order alphabet_order.cpp)
-target_link_libraries (alpha_order ${SEQAN_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries (alphabet_order ${SEQAN_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})

@@ -36,8 +36,8 @@ map<char, int> m24 = {{'C', 65}, {'G', 67}, {'T', 71}, {'A', 84}};
 
 struct ModifyStringOptions
 {
-   CharString string;
-   CharString input_file;
+   CharString string = NULL;
+   CharString input_file = NULL;
 };
 
 seqan::ArgumentParser::ParseResult parseCommandLine(
@@ -58,10 +58,9 @@ seqan::ArgumentParser::ParseResult parseCommandLine(
    setShortDescription(parser, "alphabet_order");
    setVersion(parser, "0.0.1");
    setDate(parser, "April 2019");
-   addUsageLine(parser, "-s AGCTACGT \
+   addUsageLine(parser, "-i test.fasta \
                          [\\fIOPTIONS\\fP] ");
-   addDescription(parser, "Given an annotation/feature file and an input w1 \
-                           file, give counts for each feature");
+   addDescription(parser, "Lyndon factors based on Duval algorithm.");
    ArgumentParser::ParseResult res = parse(parser, argc, argv);
 
    if (res != ArgumentParser::PARSE_OK)
@@ -135,6 +134,10 @@ bool gt(char &lhs, char &rhs, map<char, int> order)
       return false;
 }
 
+/*
+  Based on;
+  https://cp-algorithms.com/string/lyndon_factorization.html
+*/
 int duval(CharString text, StringSet<CharString> &results, map<char, int> order)
 {
    size_t n = length(text);
